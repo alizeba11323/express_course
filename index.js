@@ -23,8 +23,29 @@ const port = 5000;
 //     name: "",
 //     age:""
 // }
+
+// app.use(express.json()) //parse express data
+// app.use("/users", function (req, res, next) {
+//   console.log("start Middleware");
+//   next();
+// });
+app.use("/images", express.static("static"));
+app.use(express.static("images"));
+app.set("view engine", "pug");
+app.set("views", "./views");
 app.use("/posts", PostRouter);
 app.use("/users", UserRouter);
+
+// app.use(function (req, res, next) {
+//   console.log("End Middleware");
+//   next();
+// });
+// app.get("/app", function (req, res) {
+//   res.send("App");
+// });
+// app.get("*", function (req, res) {
+//   res.send("Wrong Route");
+// });
 // app.get("/", function (req, res) {
 //   res.send("Hello World");
 // });
