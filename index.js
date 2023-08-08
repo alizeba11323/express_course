@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const PostRouter = require("./post");
 const UserRouter = require("./user");
+const path = require("path");
+const ConnectDB = require("./db");
 const port = 5000;
 //read only request
 //post request //create new data database
@@ -29,10 +31,12 @@ const port = 5000;
 //   console.log("start Middleware");
 //   next();
 // });
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/images", express.static("static"));
 app.use(express.static("images"));
 app.set("view engine", "pug");
-app.set("views", "./views");
+app.set("views", path.join(__dirname, "views"));
 app.use("/posts", PostRouter);
 app.use("/users", UserRouter);
 
@@ -80,4 +84,5 @@ app.use("/users", UserRouter);
 //server
 app.listen(port, function () {
   console.log("app running on port " + port);
+  ConnectDB();
 });

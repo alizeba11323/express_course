@@ -1,0 +1,10 @@
+extend Layout 
+block content
+    form(action="/posts/update", method="post")
+        input(type="text", name="id", value=post._id)
+        br
+        input(type="text", name="title" value=post.title)
+        br
+        input(type="text" name="content" value=post.content)
+        br
+        button(type="submit") Edit Post 

@@ -1,0 +1,6 @@
+extend Layout 
+block content 
+    if post
+        h1=post.title 
+        p=post.content
+        a(href=`/posts/edit/${post._id}`) Edit 

@@ -4,8 +4,16 @@ html
         title=title
     body 
         include ./header.pug
-        h1=message
-        p.greeting Greating from #{greating}
-        img(src="images/avatar.png",alt="Avatar Image")
+        form(action="/users/createuser", method="post") 
+            input(type="text", name="name",placeholder="Enter UserName")
+            br
+            input(type="email", name="email",placeholder="Enter Email")
+            br
+            input(type="password", name="password",placeholder="Enter Password")
+            br
+            input(type="text",name="phone_number",placeholder="Enter Phone Number")
+            br
+            button(type="submit") Submit
+       
         include ./footer.pug
         

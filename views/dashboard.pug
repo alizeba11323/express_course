@@ -1,0 +1,6 @@
+extend Layout
+block content 
+    if posts && posts.length > 0
+        each post in posts 
+            div
+                a(href=`/posts/dashboard/${post._id}`)  #{post.title}
