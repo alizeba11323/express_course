@@ -10,6 +10,10 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    images: {
+      type: String,
+      required: false,
+    },
   },
   { timestamps: true }
 );

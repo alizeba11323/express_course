@@ -1,10 +1,11 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 const PostRouter = require("./post");
 const UserRouter = require("./user");
-const path = require("path");
 const ConnectDB = require("./db");
 const port = 5000;
+
 //read only request
 //post request //create new data database
 //put,patch request update database
@@ -34,7 +35,7 @@ const port = 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/images", express.static("static"));
-app.use(express.static("images"));
+app.use("/static", express.static("images"));
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 app.use("/posts", PostRouter);
