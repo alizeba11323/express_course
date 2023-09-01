@@ -3,6 +3,10 @@ block content
     if posts && posts.length > 0
         each post in posts 
             div
+                p welcome #{user.username}
+                form(action="/users/logout", method="post")
+                    button(type="submit") logout
+
                 a(href=`/posts/dashboard/${post._id}`)  #{post.title}
                 img(src=`/static/${post.images}`, alt="images")
                 form(action=`/posts/upload_file/${post._id}` enctype="multipart/form-data" method="post")

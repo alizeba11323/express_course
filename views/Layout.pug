@@ -4,7 +4,12 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Post Document
+        link(rel="stylesheet", href="/images/style.css")
     body 
+        if messages.error 
+            .error #{messages.error}
+        if messages.success 
+            .success #{messages.success}
     block content
     script(src="/images/check.js") 
     footer

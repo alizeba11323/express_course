@@ -3,6 +3,7 @@ const router = express.Router();
 const Post = require("./models/post");
 const multer = require("multer");
 const path = require("path");
+const { checkAuth } = require("./middlewares/checkAuth");
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, "./images"));
@@ -11,14 +12,16 @@ const storage = multer.diskStorage({
     cb(null, `${Date.now() + file.originalname}`);
   },
 });
+
 const upload = multer({ storage });
 router.route("/create").get(function (req, res) {
   res.render("createpost", { title: "Create Post" });
 });
-router.route("/dashboard").get(async function (req, res) {
+router.route("/dashboard").get(checkAuth, async function (req, res) {
+  console.log(req.session.token);
   const posts = await Post.find({});
   console.log(posts);
-  res.render("dashboard", { posts });
+  res.render("dashboard", { posts, user: req.user });
 });
 router.route("/dashboard/:id").get(async function (req, res) {
   const { id } = req.params;

@@ -3,6 +3,9 @@ const path = require("path");
 const app = express();
 const PostRouter = require("./post");
 const UserRouter = require("./user");
+const cookieParser = require("cookie-parser");
+const flash = require("express-flash");
+const session = require("express-session");
 const ConnectDB = require("./db");
 const port = 5000;
 
@@ -34,10 +37,23 @@ const port = 5000;
 // });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/images", express.static("static"));
-app.use("/static", express.static("images"));
+app.use(flash());
+app.use(cookieParser());
+app.use(
+  session({
+    secret: "secret_key",
+    saveUninitialized: true,
+    resave: true,
+    cookie: {
+      maxAge: 60 * 60 * 1000 * 24,
+    },
+  })
+);
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
+app.use("/images", express.static("static"));
+app.use("/static", express.static("images"));
+
 app.use("/posts", PostRouter);
 app.use("/users", UserRouter);
 
